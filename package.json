@@ -1,0 +1,20 @@
+{
+  "name": "Light-and-Magic",
+  "version": "0.0.0",
+  "description": "For use with the Gadgeteer light and magic hardware project",
+  "main": "requester.js",
+  "dependencies": {
+    "express": "~3.4.8",
+    "request": "~2.33.0",
+    "socket.io": "~0.9.16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sBaildon/light-and-magic-web.git"
+  },
+  "author": "Sean Baildon <sean@sbaildon.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/sBaildon/light-and-magic-web/issues"
+  }
+}
