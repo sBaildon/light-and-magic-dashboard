@@ -10,14 +10,14 @@
 		<link href="stylesheets/min/app.min.css" media="screen" rel="stylesheet" type="text/css" />
 	</head>
 
-	<body ng-controller="indexController">
+	<body>
 		<div class="content">
 			<div class="row">
-				<div class="medium-8 info-panel columns">
+				<div class="medium-8 info-panel columns" ng-controller="statusPanelController">
 					<h3>Activity</h3>
 					<div class="clearfix">
 						<ul class="button-group radius round right">
-							<li><a href="#" class="tinyist button secondary monthly">Month</a></li>
+							<li><a href="#" class="tinyist button secondary monthly" ng-click="queryMetadata()">Month</a></li>
 							<li><a href="#" class="tinyist button secondary">Day</a></li>
 							<li><a href="#" class="tinyist button secondary">Hour</a></li>
 						</ul>
@@ -27,10 +27,10 @@
 					</div>
 				</div>
 
-				<div class="medium-4 info-panel columns">
-					<h3>Stats</h3>
+				<div class="medium-4 info-panel columns" ng-controller="statusPanelController">
+					<h3>Status</h3>
 					<div class="clearfix">
-						<span class="left"><strong>Polling rate</strong></span><span class="right">{{pollingRate}} <em>ms</em></span>
+						<span class="left"><strong>Polling rate</strong></span><span class="right">{{pollingRate}} <em>{{pollingRateUnit}}</em></span>
 						<br><br>
 						<span class="left"><strong>Last update</strong></span><span class="right">{{lastUpdateTime}}</span>
 						<br>
@@ -47,28 +47,11 @@
 		<script src="libs/moment.js"></script>
 
 		<script src="js/app.js"></script>
+		<script src="js/controllers/statusPanelController.js"></script>
+		<script src="js/controllers/activityPanelController.js"></script>
 
 		<script>
-			nv.addGraph(function() {
-			  var chart = nv.models.lineChart();
 
-			  chart.xAxis
-			      .axisLabel('Time (ms)')
-			      .tickFormat(d3.format(',r'));
-
-			  chart.yAxis
-			      .axisLabel('Voltage (v)')
-			      .tickFormat(d3.format('.02f'));
-
-			  d3.select('#chart svg')
-			      .datum(data())
-			    .transition().duration(500)
-			      .call(chart);
-
-			  nv.utils.windowResize(chart.update);
-
-			  return chart;
-			});
 
 			data = function() {
 			  var sin = [],
