@@ -1,0 +1,31 @@
+@import "partials/panel";
+
+.content {
+	width: 				90%;
+	margin:				0 auto;
+	margin-top:			25px;
+}
+
+.minor-pad {
+	padding-top:			5px;
+}
+
+body {
+	background:			rgba(0, 0, 0, 0);
+}
+
+html {
+	background:			url('../../img/bg.jpg') no-repeat center center fixed;
+	-webkit-background-size: 	cover;
+	-moz-background-size:		cover;
+	-o-background-size:		cover;
+	background-size:		cover;
+}
+
+button.tinyist, .button.tinyist {
+	padding-top: 0.425rem;
+	padding-right: 1rem;
+	padding-bottom: 0.4875rem;
+	padding-left: 1rem;
+	font-size: 0.6875rem;
+}
