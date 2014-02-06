@@ -13,7 +13,8 @@
 	<body>
 		<div class="content">
 			<div class="row">
-				<div class="medium-8 info-panel columns" ng-controller="statusPanelController">
+
+				<div class="medium-8 info-panel columns" ng-controller="activityPanelController">
 					<h3>Activity</h3>
 					<div class="clearfix">
 						<ul class="button-group radius round right">
@@ -25,18 +26,25 @@
 							<svg></svg>
 						</div>
 					</div>
+
+					{{result}}
 				</div>
 
 				<div class="medium-4 info-panel columns" ng-controller="statusPanelController">
 					<h3>Status</h3>
 					<div class="clearfix">
-						<span class="left"><strong>Polling rate</strong></span><span class="right">{{pollingRate}} <em>{{pollingRateUnit}}</em></span>
+						<span class="left"><strong>Polling rate</strong></span><span class="right">{{pollingRate.value}} <em>{{pollingRate.unit}}</em></span>
 						<br><br>
 						<span class="left"><strong>Last update</strong></span><span class="right">{{lastUpdateTime}}</span>
 						<br>
 						<span class="right minor-pad">{{lastUpdateVerbose}}</span>
+						<br><br>
+						<span class="left"><strong>WiFi</strong></span><span class="right">WIFI17</span>
+						<br><br>
+						<span class="left"><strong>Next refresh</strong></span><span class="right">{{refreshTimer}}</span>
 					</div>
 				</div>
+				
 			</div>
 
 		</div>
@@ -49,35 +57,6 @@
 		<script src="js/app.js"></script>
 		<script src="js/controllers/statusPanelController.js"></script>
 		<script src="js/controllers/activityPanelController.js"></script>
-
-		<script>
-
-
-			data = function() {
-			  var sin = [],
-			      cos = [];
-
-			  for (var i = 0; i < 100; i++) {
-			    sin.push({x: i, y: Math.sin(i/10)});
-			    cos.push({x: i, y: .5 * Math.cos(i/10)});
-			  }
-
-			  return [
-			    {
-			      values: sin,
-			      key: 'Sine Wave',
-			      color: '#ff7f0e'
-			    },
-			    {
-			      values: cos,
-			      key: 'Cosine Wave',
-			      color: '#2ca02c'
-			    }
-			  ];
-			}
-
-		</script>
-
 	</body>
 
 </html>
