@@ -18,16 +18,15 @@
 					<h3>Activity</h3>
 					<div class="clearfix">
 						<ul class="button-group radius round right">
-							<li><a href="#" class="tinyist button secondary monthly" ng-click="queryMetadata()">Month</a></li>
-							<li><a href="#" class="tinyist button secondary">Day</a></li>
-							<li><a href="#" class="tinyist button secondary">Hour</a></li>
+							<li><a href="#" class="tinyist button secondary" ng-click="queryRGBData(3600, 'months')">Month</a></li>
+							<li><a href="#" class="tinyist button secondary" ng-click="queryRGBData(1800, 'weeks')">Week</a></li>
+							<li><a href="#" class="tinyist button secondary" ng-click="queryRGBData(300, 'days')">Day</a></li>
+							<li><a href="#" class="tinyist button secondary" ng-click="queryRGBData(60, 'hours')">Hour</a></li>
 						</ul>
 						<div id="chart">
 							<svg></svg>
 						</div>
 					</div>
-
-					{{result}}
 				</div>
 
 				<div class="medium-4 info-panel columns" ng-controller="statusPanelController">
@@ -50,7 +49,7 @@
 		</div>
 
 		<script src="libs/angular.min.js"></script>
-		<script src="libs/d3.v3.min.js"></script>
+		<script src="libs/d3.v3.js"></script>
 		<script src="libs/nv.d3.min.js"></script>
 		<script src="libs/moment.js"></script>
 
