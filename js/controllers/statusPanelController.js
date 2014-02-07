@@ -66,7 +66,7 @@ statusPanelController.controller('statusPanelController', function($scope, $http
 
 	$document.ready(function() {
 		$scope.queryMetadata();
+		$interval($scope.refreshTick, 1000);
 	});
 
-	$interval($scope.refreshTick, 1000);
 });
