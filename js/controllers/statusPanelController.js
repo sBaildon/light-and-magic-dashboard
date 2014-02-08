@@ -16,10 +16,10 @@ statusPanelController.controller('statusPanelController', function($scope, $http
 	$scope.refreshTick = function() {
 		$scope.lastUpdateVerbose = moment($scope.lastUpdate).fromNow();
 
-		if($scope.refreshTimer == 0 && !$scope.queryInProgress) {
-			$scope.queryMetadata();
-		} else if ($scope.refreshTimer != 0) {
+		if($scope.refreshTimer != 0) {
 			$scope.refreshTimer = $scope.refreshTimer - 1;
+		} else if ($scope.refreshTimer == 0 && !$scope.queryInProgress) {
+			$scope.queryMetadata();
 		}
 	};
 
@@ -42,6 +42,7 @@ statusPanelController.controller('statusPanelController', function($scope, $http
 		}).error(function(data) {
 			$scope.pollingRate = $scope.errorText;
 			$scope.lastUpdateTime = $scope.errorText;
+			$scope.wifiSSID = $scope.errorText;
 		}).then(function() {
 			$scope.refreshTimer = 10;
 			$scope.queryInProgress = false;
