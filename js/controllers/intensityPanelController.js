@@ -14,11 +14,11 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 				.axisLabel('Date')
 				.ticks(30)
 				.tickFormat(function(d) { 
-					if (date == 'months') {
+					if (date === 'month') {
 						return d3.time.format('%d %b')(new Date(d));
-					} else if (date == 'weeks') {
+					} else if (date === 'week') {
 						return d3.time.format('%a')(new Date(d));
-					} else if (date == 'days') {
+					} else if (date === 'day') {
 						return d3.time.format('%H:%M')(new Date(d));
 					} else {
 						return d3.time.format('%H:%M')(new Date(d));
@@ -29,7 +29,7 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 				.axisLabel('Value')
 				.tickFormat(d3.format('.01f'));
 
-			d3.select('#chart svg')
+			d3.select('#intensity-chart svg')
 				.datum($scope.getData())
 				.transition().duration(500)
 				.call(chart);
@@ -38,7 +38,6 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 
 			return chart;
 		});
-
 	};
 
 	$scope.queryIntensity = function(timespan) {
@@ -78,7 +77,8 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 		];
 	};
 
-	/* Xively only accepts certain intervals to prevent data overload
+	/* *
+	 * Xively only accepts certain intervals to prevent data overload
 	 * This function returns the best options
 	 * */
 	$scope.getQueryInterval = function(timespan) {
@@ -89,7 +89,7 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 		} else if (timespan === 'day') {
 			return 300
 		} else if (timespan === 'hour') {
-			return 60;
+			return 30;
 		} else {
 			return 60;
 		}
