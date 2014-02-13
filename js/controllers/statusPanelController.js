@@ -27,7 +27,7 @@ statusPanelController.controller('statusPanelController', function($scope, $http
 		$scope.queryInProgress = true;
 		$http({
 			method: 'GET',
-			url: 'https://api.xively.com/v2/feeds/34780663?datastreams=polling-rate,wifi-ssid,heartbeat,Intensity',
+			url: 'https://api.xively.com/v2/feeds/34780663?datastreams=heartbeat,Intensity,polling-rate,wifi-ssid',
 			headers: {
 				'X-ApiKey': 'TuQQMiTAvUUg7qVwoQQmCi0i4CyGIcmmzKKDshENxCxibDaD',
 				'Cache-Control': 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
@@ -38,7 +38,7 @@ statusPanelController.controller('statusPanelController', function($scope, $http
 
 			$scope.wifiSSID = data.datastreams[3].current_value;
 
-			if ( moment(data.datastreams[0].at).isAfter(moment().subtract('s', 45).toISOString()) ) {
+			if ( moment(data.datastreams[0].at).isAfter(moment().subtract('s', 45)) ) {
 				$scope.isConnected = 'Online';
 			} else {
 				$scope.isConnected = 'Offline';
@@ -51,6 +51,7 @@ statusPanelController.controller('statusPanelController', function($scope, $http
 			$scope.pollingRate = $scope.errorText;
 			$scope.lastUpdateTime = $scope.errorText;
 			$scope.wifiSSID = $scope.errorText;
+			$scope.isConnected = $scope.errorText;
 		}).then(function() {
 			$scope.refreshTimer = 10;
 			$scope.queryInProgress = false;

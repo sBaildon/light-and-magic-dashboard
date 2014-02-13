@@ -72,7 +72,7 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 			{
 				values: $scope.queryResults,
 				key: 'Intensity',
-				color: '#CF1332'
+				color: '#EA5E1B'
 			}
 		];
 	};

@@ -1,2 +1,6 @@
 .DS_Store
 .sass-cache/*
+package.json
+node_modules/*
+Gruntfile.js
+server.js
