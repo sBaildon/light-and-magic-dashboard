@@ -53,6 +53,10 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 				'Pragma': 'no-cache'
 			}
 		}).success(function(data) {
+			if (data.length < 1) {
+				return;
+			}
+			
 			var temp = [];
 
 			for(var i = 0; i < data.datastreams[0].datapoints.length; i++) {
