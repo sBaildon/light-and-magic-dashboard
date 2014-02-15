@@ -6,12 +6,48 @@
 		margin-top:	-5px;
 
 		> div {
-			height: 300px;
+			height: 23em;
 			padding-bottom: 50px;
 		}
 	}
 
 	h3 {
 		margin-left:	5px;
+	}
+}
+
+.interaction-panel {
+	@extend .info-panel;
+	> div {
+		padding:	0;
+		height:		20em;
+		overflow-y:	scroll;
+
+		ul {
+			list-style:	none;
+			padding:	0;
+			margin:		0;
+
+			.selected {
+				background:	#eeeeee;
+			}
+
+			li {
+				border-bottom:	1px solid rgba(100, 100, 100, 0.3);
+				padding:	0.3em 0 0.3em 0.6em;
+				font-size:	1.1em;
+				transition:	0.1s;
+			}
+
+			li:hover {
+				background:	#eaeaed;
+				transition:	0.1s;
+			}
+
+			span {
+				color:		#aaaaaa;
+				font-size:	0.8em;
+			}
+		}
 	}
 }
