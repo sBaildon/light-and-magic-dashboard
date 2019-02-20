@@ -16,7 +16,7 @@
 	}
 }
 
-.interaction-panel {
+.list-panel {
 	@extend .info-panel;
 	> div {
 		padding:	0;
@@ -49,5 +49,12 @@
 				font-size:	0.8em;
 			}
 		}
+	}
+}
+
+.interaction-panel {
+	@extend .info-panel;
+	> div {
+		padding:	0;
 	}
 }

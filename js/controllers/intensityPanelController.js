@@ -2,9 +2,15 @@
 
 var intensityPanelController = angular.module('intensityPanelController', []);
 
-intensityPanelController.controller('intensityPanelController', function($scope, $http, $document) {
+intensityPanelController.controller('intensityPanelController', function($scope, $http, $document, objectPasser) {
 
-	$scope.queryResults;
+	$scope.datasets = [];
+
+	$scope.sessionId;
+	$scope.sessionStart;
+	$scope.sessionEnd;
+
+	$scope.responses;
 
 	$scope.addChart = function(date) {
 		nv.addGraph(function() {
@@ -44,8 +50,8 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 		$http({
 			method: 'GET',
 			url: 'https://api.xively.com/v2/feeds/34780663\
-				?start=' + moment().subtract(timespan, 1).toISOString() + '\
-				&end=' + moment(new Date()).toISOString() + '\
+				?start=' + moment($scope.sessionEnd).subtract(timespan, 1).toISOString() + '\
+				&end=' + moment($scope.sessionEnd).toISOString() + '\
 				&interval=' + $scope.getQueryInterval(timespan) + '&datastreams=Intensity&limit=1000',
 			headers: {
 				'X-ApiKey': 'TuQQMiTAvUUg7qVwoQQmCi0i4CyGIcmmzKKDshENxCxibDaD',
@@ -56,14 +62,17 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 			if (data.length < 1) {
 				return;
 			}
-			
-			var temp = [];
+
+			var queryResults = [];
 
 			for(var i = 0; i < data.datastreams[0].datapoints.length; i++) {
-				temp.push({x: moment(data.datastreams[0].datapoints[i].at).toDate(), y: parseInt(data.datastreams[0].datapoints[i].value)});
+				queryResults.push({
+					x: moment(data.datastreams[0].datapoints[i].at).toDate(),
+					y: parseInt(data.datastreams[0].datapoints[i].value)
+				});
 			}
 
-			$scope.queryResults = temp;
+			$scope.datasets = [ queryResults ];
 
 			$scope.addChart(timespan);
 		}).error(function(data) {
@@ -72,19 +81,22 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 	};
 
 	$scope.getData = function() {
-		return [
-			{
-				values: $scope.queryResults,
-				key: 'Intensity',
-				color: '#EA5E1B'
-			}
-		];
+		var data = [];
+
+		for(var i = 0; i < $scope.datasets.length; i++) {
+			data.push({
+				values: $scope.datasets[0],
+				key: parseInt(i)
+			});
+		}
+
+		return data;
 	};
 
-	/* *
+	/* 
 	 * Xively only accepts certain intervals to prevent data overload
-	 * This function returns the best options
-	 * */
+	 * This function returns the best option for each.
+	 */
 	$scope.getQueryInterval = function(timespan) {
 		if (timespan === 'month') {
 			return 3600;
@@ -100,7 +112,36 @@ intensityPanelController.controller('intensityPanelController', function($scope,
 	}
 
 	$document.ready(function() {
+		$scope.sessionId = "Real Time";
+		$scope.sessionStart = moment().subtract('month', 1);
+		$scope.sessionEnd = moment();
+
 		$scope.queryIntensity('hour');
+	});
+
+	$scope.$on('handleBroadcast', function() {
+		if(objectPasser.val.length === 0) {
+			$scope.sessionId = "Real Time";
+			$scope.sessionEnd = moment();
+
+			$scope.queryIntensity('hour');
+			return;
+		}
+		$scope.sessionId = objectPasser.val[0].id;
+		$scope.sessionStart = objectPasser.val[0].start;
+		$scope.sessionEnd = objectPasser.val[0].end;
+
+		$scope.queryIntensity('hour');
+		// if(objectPasser.val.length === 0) {
+		// 	$scope.sessionId = "Real Time";
+		// 	return;
+		// } else {
+		// 	$scope.sessionId = "";
+		// }
+
+		// for(var i = 0; i < objectPasser.val.length; i++) {
+		// 	$scope.sessionId = $scope.sessionId + objectPasser.val[i].id + " + ";
+		// }
 	});
 
 });

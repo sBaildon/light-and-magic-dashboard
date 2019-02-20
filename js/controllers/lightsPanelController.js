@@ -10,7 +10,7 @@ lightsPanelController.controller('lightsPanelController', function($scope, $http
 	$scope.getLightStatus = function() {
 		$http({
 			method: 'GET',
-			url: 'https://api.xively.com/v2/feeds/34780663/datastreams/lights-on',
+			url: 'https://api.xively.com/v2/feeds/34780663/datastreams/lighting',
 			headers: {
 				'X-ApiKey': 'TuQQMiTAvUUg7qVwoQQmCi0i4CyGIcmmzKKDshENxCxibDaD',
 				'Cache-Control': 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
@@ -29,6 +29,7 @@ lightsPanelController.controller('lightsPanelController', function($scope, $http
 	};
 
 	$document.ready(function() {
+		$scope.getLightStatus();
 		$interval($scope.getLightStatus, 10000);
 	});
 });

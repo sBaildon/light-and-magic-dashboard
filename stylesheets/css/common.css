@@ -1,13 +1,52 @@
-.info-panel > div {
+.info-panel > div, .list-panel > div, .interaction-panel > div {
   background: white;
   border: 1px solid rgba(64, 64, 64, 0.3);
   padding: 10px;
   margin-top: -5px; }
-  .info-panel > div > div {
-    height: 300px;
+  .info-panel > div > div, .list-panel > div > div, .interaction-panel > div > div {
+    height: 23em;
     padding-bottom: 50px; }
-.info-panel h3 {
+.info-panel h3, .list-panel h3, .interaction-panel h3 {
   margin-left: 5px; }
+
+.list-panel > div {
+  padding: 0;
+  height: 20em;
+  overflow-y: scroll; }
+  .list-panel > div ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    .list-panel > div ul .selected {
+      background: #eeeeee; }
+    .list-panel > div ul li {
+      border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+      padding: 0.3em 0 0.3em 0.6em;
+      font-size: 1.1em;
+      transition: 0.1s; }
+    .list-panel > div ul li:hover {
+      background: #eaeaed;
+      transition: 0.1s; }
+    .list-panel > div ul span {
+      color: #aaaaaa;
+      font-size: 0.8em; }
+
+.interaction-panel > div {
+  padding: 0; }
+
+button {
+  height: 50px; }
+
+input {
+  width: 100%;
+  border-style: none;
+  padding: 5px;
+  border-bottom: 1px solid rgba(64, 64, 64, 0.3);
+  box-shadow: inset 0 0 5px rgba(64, 64, 64, 0.2); }
+
+input:focus {
+  outline: none;
+  border-bottom: 1px solid rgba(100, 255, 100, 0.3); }
 
 .content {
   width: 90%;
@@ -18,7 +57,7 @@
   padding-top: 5px; }
 
 body {
-  background: rgba(0, 0, 0, 0); }
+  background: transparent; }
 
 html {
   background: url("../../img/bg.jpg") no-repeat center center fixed;
